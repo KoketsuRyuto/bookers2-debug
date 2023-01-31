@@ -1,5 +1,4 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!
   before_action :ensure_correct_book, only: [:update,:edit,:destroy]
 
   def show
