@@ -16,6 +16,7 @@ class User < ApplicationRecord
   # DM機能の追加
   has_many :user_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy
+  has_many :rooms, through: :user_rooms
   
   has_one_attached :profile_image
 
