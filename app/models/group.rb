@@ -1,11 +1,12 @@
 class Group < ApplicationRecord
-  has_many :groups
-  has_many :users, through: :group_users
+  has_one_attached :image
+  has_many :group_users, dependent: :destroy
+  belongs_to :owner, class_name: 'User'
   
   validates :name, presence: true
   validates :introduction, presence: true
   
   def get_image
-    (image_id.attached?) ? image : 'no_image.jpg'
+    (image.attached?) ? image : 'no_image.jpg'
   end
 end

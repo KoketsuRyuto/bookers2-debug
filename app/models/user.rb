@@ -20,8 +20,7 @@ class User < ApplicationRecord
   # 閲覧数カウントのアソシエーション
   has_many :view_counts, dependent: :destroy
   # グループ作成機能の追加
-  has_many :group_users
-  has_many :groups, through: :group_users
+  has_many :group_users, dependent: :destroy
   
   has_one_attached :profile_image
 
