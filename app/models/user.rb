@@ -17,6 +17,11 @@ class User < ApplicationRecord
   has_many :user_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy
   has_many :rooms, through: :user_rooms
+  # 閲覧数カウントのアソシエーション
+  has_many :view_counts, dependent: :destroy
+  # グループ作成機能の追加
+  has_many :group_users
+  has_many :groups, through: :group_users
   
   has_one_attached :profile_image
 

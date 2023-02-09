@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'groups/index'
+  get 'groups/show'
+  get 'groups/edit'
+  get 'index/show'
+  get 'index/edit'
   get 'chats/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
@@ -7,6 +12,7 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about",as:"about"
   get "search" => "searches#search"
   resources :chats, only: [:show,:create]
+  resources :groups, except: [:destroy]
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments, only: [:create,:destroy]
