@@ -12,8 +12,11 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about",as:"about"
   get "search" => "searches#search"
   resources :chats, only: [:show,:create]
+  
   resources :groups, except: [:destroy] do
     resource :group_users, only: [:create,:destroy]
+    resource :event_notices, only: [:new,:create,]
+    get 'event_notices' => 'event_notices#sent'
   end
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do

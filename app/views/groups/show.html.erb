@@ -30,11 +30,12 @@
             </td>
             <td>
               <% if @group.owner.id == current_user.id %>
-                <%= link_to "Edit", edit_group_path(@group), class: "btn btn-sm btn-success" %>
-              <% elsif @group.includesUser?(current_user) %>
-                <%= link_to 'Leave this group', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
+                <td><%= link_to "Edit", edit_group_path(@group), class: "btn btn-sm btn-success" %></td>
+                <td><%= link_to 'Notice an Event', new_group_event_notices_path(@group), class:"btn btn-sm btn-info" %></td>
+              <% elsif @group.includeUser?(current_user) %>
+                <td><%= link_to 'Leave this group', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %></td>
               <% else %>
-                <%= link_to 'Join this group', group_group_users_path(@group), class: "btn btn-sm btn-success" %>
+                <td><%= link_to 'Join this group', group_group_users_path(@group), class: "btn btn-sm btn-success" %></td>
               <% end %>
             </td>
           </tr>
