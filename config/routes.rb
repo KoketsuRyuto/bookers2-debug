@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about",as:"about"
   get "search" => "searches#search"
   resources :chats, only: [:show,:create]
-  resources :groups, except: [:destroy]
+  resources :groups do
+    get "join" => "groups#join"
+  end
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments, only: [:create,:destroy]

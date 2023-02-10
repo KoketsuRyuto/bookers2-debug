@@ -1,6 +1,10 @@
 class GroupsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
   
+  def new
+    @group = Group.new
+  end
+  
   def index
     @book = Book.new
     @groups = Group.all
@@ -11,13 +15,16 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
   
-  def new
-    @group = Group.new
+  def join
+    @group = Group.find(params[:group_id])
+    @group.users << current_user
+    redirect_to groups_path
   end
   
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
+    @group.users << current_user
     if @group.save
       redirect_to groups_path
     else
@@ -36,14 +43,16 @@ class GroupsController < ApplicationController
     end
   end
   
+  def destroy
+    @group = Group.find(params[:id])
+    @group.users.delete(current_user)
+    redirect_to groups_path
+  end
+  
   private
   
   def group_params
     params.require(:group).permit(:name,:introduction,:image)
-  end
-  
-  def is_owned_by?(user)
-    owner.id == user.id
   end
   
   def ensure_correct_user
