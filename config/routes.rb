@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  get 'groups/index'
-  get 'groups/show'
-  get 'groups/edit'
-  get 'index/show'
-  get 'index/edit'
-  get 'chats/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   devise_for :users
+  
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+  
   root to: "homes#top"
   get "home/about"=>"homes#about",as:"about"
   get "search" => "searches#search"
