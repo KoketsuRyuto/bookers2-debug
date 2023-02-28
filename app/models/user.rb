@@ -21,12 +21,12 @@ class User < ApplicationRecord
   has_many :view_counts, dependent: :destroy
   # グループ作成機能の追加
   has_many :group_users, dependent: :destroy
-  
+
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
-  
+
   # フォローした時の処理
   def follow(user_id)
     relationships.create(followed_id: user_id)
@@ -39,7 +39,7 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect"
@@ -54,16 +54,15 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
-  
+
   def get_profile_image
-    (profile_image.attached?) ? profile_image : 'no_image.jpg'
+    (profile_image.attached?) ? profile_image : "no_image.jpg"
   end
-  
+
   def self.guest
-    find_or_create_by!(name: 'guestuser',email: 'guest@example.com') do |user|
+    find_or_create_by!(name: "guestuser",email: "guest@example.com") do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "guestuser"
     end
   end
-  
 end
