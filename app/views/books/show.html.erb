@@ -11,7 +11,7 @@
   		<table class='table'>
   		  <tr>
           <td><%= link_to(@book.user) do %>
-            <%= image_tag @book.user.get_profile_image, size:"100x100" %><br>
+            <%= image_tag @book.user.get_profile_image, size:"50x50" %><br>
             <%= @book.user.name %>
             <% end %>
           </td>
@@ -19,7 +19,7 @@
           <td><%= @book.body %></td>
           <td class="comment-counter">
             <%= render 'book_comments/comment_counter', book: @book %>
-          </td>
+          <!--</td>-->
           <!--<td class="favorite-btn_<%= @book.id %>">-->
           <!--  <%= render "favorites/favorite", book: @book %>-->
           <!--</td>-->
